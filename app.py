@@ -1,5 +1,5 @@
 # Engineering Student Council Backend
-# @author Amol Budhiraja
+# @author Amol Budhiraja and Ethan Hu
 
 from flask import Flask
 from services.newsservice import news_service
