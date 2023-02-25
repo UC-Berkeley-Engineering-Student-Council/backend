@@ -1,5 +1,5 @@
 #newssservice.py
-# @author: Ethan Hu
+# @author: Ethan Hu and Amol Budhiraja
 
 from bs4 import BeautifulSoup
 import urllib.request
@@ -19,16 +19,17 @@ def news_service(app):
         soup = BeautifulSoup(source, 'html.parser')
         
         title_list = soup.find_all('a', {'class': 'post-title'})
-        links = []
-        titles = []
+        articles = []
         for title in title_list:
-            links.append(title.get("href"))
-            titles.append(title.get("title"))
+            article_url = title.get("href")
+            article_title = title.get("title")
+            article = (article_title, article_url)
+            articles.append(article)
 
-        caption_list = soup.find_all('div', {'class': 'caption'})
-        captions = []
-        for caption in caption_list:
-            captions.append(str(caption.contents[2].strip()))
+        # caption_list = soup.find_all('div', {'class': 'caption'})
+        # captions = []
+        # for caption in caption_list:
+        #     captions.append(str(caption.contents[2].strip()))
 
-        return titles+captions[0::2]+links
+        return articles
 
